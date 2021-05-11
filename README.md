@@ -26,10 +26,10 @@ A aplicação deve ter três funcionalidades:
 
 
 
-###To-do
-- [] Implementação da database
-- [] Implementação dos testes
-- [] Implementação da lógica do programa
-- [] Implementação da interface gráfica
+### To-do
+- [ ] Implementação da database
+- [ ] Implementação dos testes
+- [ ] Implementação da lógica do programa
+- [ ] Implementação da interface gráfica
 
 
