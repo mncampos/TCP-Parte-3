@@ -19,6 +19,7 @@ no início da aplicação:
 * Artigo: que possui id, título, autor (que é um pesquisador), conferência, tópico de pesquisa relacionado.
 * Conferência: que possui sigla, artigos submetidos, membros do comitê de programa (que são
 pesquisadores).
+
 A aplicação deve ter três funcionalidades:
 * Alocação de	Artigos	a Membros do Comitê	de Programa
 * Atribuição de Notas	a Artigos
