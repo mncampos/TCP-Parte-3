@@ -7,6 +7,8 @@ public interface ConferenciaCommands {
 	public final float MAX_REVISORES = 5;
 	
 	public void alocaArtigos(Conferencia conferencia);
+	public void atribuirNota(); // TO-DO
+	public void visualizarRelatorio(); // TO-DO
 	
 	
 }

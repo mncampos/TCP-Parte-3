@@ -23,4 +23,16 @@ public class ConferenciaCommandsImpl implements ConferenciaCommands{
 		Collections.sort(comiteAvaliador);
 	}
 
+	@Override
+	public void atribuirNota() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visualizarRelatorio() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
