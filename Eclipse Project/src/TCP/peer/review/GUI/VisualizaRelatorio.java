@@ -21,7 +21,7 @@ public class VisualizaRelatorio {
 	
 	public VisualizaRelatorio()
 	{
-		window = new Windows(1);
+		window = new Windows(300, 100, "Peer Review");
 		Button c1 = new Button("ICSE", 300, 50, 45, 50, 0);
 		Button c2 = new Button("FSE", 300, 50, 45, 100, 0);
 		Button c3 = new Button("SBES", 300, 50, 45, 150, 0);
