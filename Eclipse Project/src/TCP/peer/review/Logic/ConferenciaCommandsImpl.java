@@ -16,11 +16,7 @@ public class ConferenciaCommandsImpl implements ConferenciaCommands{
 	
 	@Override
 	public void alocaArtigos(Conferencia conferencia) {
-		ArrayList<Artigo> artigosConferencia = conferencia.getArtigosSubmetidos();
-		Artigo artigoMenorId = conferencia.artigoMenorId(artigosConferencia);
-		
-		ArrayList<Pesquisador> comiteAvaliador = conferencia.podemAvaliar(artigoMenorId, conferencia.getComitê());
-		Collections.sort(comiteAvaliador);
+
 	}
 
 	@Override

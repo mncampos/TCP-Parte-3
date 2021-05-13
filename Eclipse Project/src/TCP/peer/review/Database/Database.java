@@ -6,6 +6,7 @@ import java.util.Map;
 
 import TCP.peer.review.Logic.Artigo;
 import TCP.peer.review.Logic.Conferencia;
+import TCP.peer.review.Logic.PeerReview;
 import TCP.peer.review.Logic.Pesquisador;
 
 
@@ -20,15 +21,36 @@ public class Database {
 	private final Map<Integer, Conferencia> conferencias;
 	private final Afiliacoes AfiliacoesMap = new Afiliacoes();
 	private final Topicos TopicosMap = new Topicos();
+	private  ArrayList<PeerReview> pr = new ArrayList<>();
 	
 	//Topicos keys
 	//0 = Modularity, 1 = Software Reuse, 2 = Aspect-oriented Programming, 3 = Software Product Lines,
 	//4 = Software Achitecture, 5 = Software Testing, 6 = Software Quality
 	
 	
+	public void setPr(ArrayList<PeerReview> pr) {
+		this.pr = pr;
+	}
+
+	public ArrayList<PeerReview> getPr() {
+		return pr;
+	}
+
 	public Pesquisador getPesquisador(int key)
 	{
 		return pesquisadores.get(key);
+	}
+
+	public Map<Integer, Pesquisador> getPesquisadores() {
+		return pesquisadores;
+	}
+
+	public Map<Integer, Artigo> getArtigos() {
+		return artigos;
+	}
+
+	public Map<Integer, Conferencia> getConferencias() {
+		return conferencias;
 	}
 
 	public Artigo getArtigo(int key)

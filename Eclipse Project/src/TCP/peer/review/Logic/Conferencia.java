@@ -76,27 +76,5 @@ public class Conferencia {
 		Comitê = comitê;
 	}
 	
-	public Artigo artigoMenorId(ArrayList<Artigo> artigosConferencia) {
-		
-		int i = 0;
-		Artigo artigoMenorId = artigosConferencia.get(i);
-		
-		for(i = 0; i < artigosConferencia.size(); i++) {
-			if(artigosConferencia.get(i).getId() < artigosConferencia.get(i++).getId()) {
-				artigoMenorId = artigosConferencia.get(i);
-			}
-		}
-		return artigoMenorId;
-	}
-	
-	public ArrayList<Pesquisador> podemAvaliar(Artigo artigo, ArrayList<Pesquisador> comite){
-		ArrayList<Pesquisador> listaPesquisadoresFiltrada = new ArrayList<>();
-		
-		for(Pesquisador pesq : comite) {
-			if (artigo.podeAvaliar(pesq)){
-				listaPesquisadoresFiltrada.add(pesq);
-			}
-		}
-		return listaPesquisadoresFiltrada;
-	}	
+
 }

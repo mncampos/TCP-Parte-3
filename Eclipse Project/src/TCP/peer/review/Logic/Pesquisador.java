@@ -7,7 +7,7 @@ public class Pesquisador implements Comparable<Pesquisador> {
 	private String nome;
 	private String afiliacao;
 	private ArrayList<String> TopicosDePesquisa;
-	private ArrayList<Artigo> artigosAlocados = new ArrayList<>();
+	private int numArtigosAlocados = 0;
 	
 
 
@@ -50,18 +50,32 @@ public class Pesquisador implements Comparable<Pesquisador> {
 		TopicosDePesquisa = topicosDePesquisa;
 	}
 	
-	public ArrayList<Artigo> getArtigosAlocados(){
-		return artigosAlocados;
-	}
 	
-	public int qtdeArtigosAlocados() {
-		return artigosAlocados.size();
+
+	public int getNumArtigosAlocados() {
+		return numArtigosAlocados;
+	}
+
+	public void setNumArtigosAlocados(int numArtigosAlocados) {
+		this.numArtigosAlocados = numArtigosAlocados;
 	}
 
 	@Override
 	public int compareTo(Pesquisador other) {
+		int compareID = ((Pesquisador) other).getId();
+		int compareNumArtigos = ((Pesquisador) other).getNumArtigosAlocados();
 		
-		return Integer.toString(this.qtdeArtigosAlocados()).compareTo(Integer.toString(other.qtdeArtigosAlocados()));
+		if(this.numArtigosAlocados == compareNumArtigos) {
+			return this.id-compareID + this.numArtigosAlocados-compareNumArtigos;
+		}
+			
+		if(other.numArtigosAlocados > 0 || this.numArtigosAlocados > 0) {
+			return this.numArtigosAlocados-compareNumArtigos;
+		}
+		else {
 
-	}
+			return this.id-compareID + this.numArtigosAlocados-compareNumArtigos;
+		}
+		
+			}
 }

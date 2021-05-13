@@ -28,10 +28,12 @@ public class PeerReview {
 	public void setNota(int nota) {
 		Nota = nota;
 	}
-	public PeerReview(Artigo artigo, Pesquisador revisores, int nota) {
+	public PeerReview(Artigo artigo, Pesquisador revisores) {
 		this.artigo = artigo;
 		this.revisores = revisores;
-		Nota = nota;
 	}
+	
+	
+
 		
 }

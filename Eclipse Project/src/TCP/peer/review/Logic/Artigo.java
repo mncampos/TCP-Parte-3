@@ -8,7 +8,6 @@ public class Artigo {
 	private Pesquisador autor;
 	private Conferencia conferência;
 	private String TopicoDePesquisa;
-	private ArrayList<Pesquisador> revisores = new ArrayList<>();
 
 	public Artigo(Integer id, String titulo, Pesquisador autor, Conferencia conferência, String TopicoDePesquisa) {
 		this.id = id;
@@ -58,31 +57,7 @@ public class Artigo {
 		TopicoDePesquisa = topicoDePesquisa;
 	}
 
-	public ArrayList<Pesquisador> getRevisores() {
-		return revisores;
-	}
 
-	public int qtdeRevisores() {
-		return revisores.size();
-	}
 
-	public boolean podeAvaliar(Pesquisador pesquisador) {
-		if (pesquisador.equals(this.autor)
-				|| pesquisador.getAfiliacao().equals(this.autor.getAfiliacao())
-				|| contemplaTopico(pesquisador)
-				|| pesquisador.getArtigosAlocados().contains(this)) {
-			return false;
-		}
-		return true;
-	}
-
-	public boolean contemplaTopico(Pesquisador pesquisador) {
-		for (int i = 0; i < pesquisador.getTopicosDePesquisa().size(); i++) {
-			if (pesquisador.getTopicosDePesquisa().get(i).equals(this.TopicoDePesquisa)) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 }
