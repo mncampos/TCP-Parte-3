@@ -1,9 +1,5 @@
 package TCP.peer.review.Logic;
 
-import java.util.ArrayList;
-
-import TCP.peer.review.Database.Database;
-
 public class PeerReview {
 
 	private Artigo artigo;

@@ -1,7 +1,5 @@
 package TCP.peer.review.Logic;
 
-import java.util.ArrayList;
-
 public class Artigo {
 	private Integer id;
 	private String titulo;
