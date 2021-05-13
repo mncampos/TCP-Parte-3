@@ -31,6 +31,6 @@ A aplicação deve ter três funcionalidades:
 - [X] Implementação da database
 - [ ] Implementação dos testes
 - [ ] Implementação da lógica do programa
-- [ ] Implementação da interface gráfica
+- [X] Implementação da interface gráfica
 
 

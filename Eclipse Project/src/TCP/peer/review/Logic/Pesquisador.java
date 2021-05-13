@@ -2,13 +2,12 @@ package TCP.peer.review.Logic;
 
 import java.util.ArrayList;
 
-import TCP.peer.review.Database.Afiliacoes;
-
-public class Pesquisador {
+public class Pesquisador implements Comparable<Pesquisador> {
 	private Integer id;
 	private String nome;
 	private String afiliacao;
 	private ArrayList<String> TopicosDePesquisa;
+	private int numArtigosAlocados = 0;
 	
 
 
@@ -53,4 +52,30 @@ public class Pesquisador {
 	
 	
 
+	public int getNumArtigosAlocados() {
+		return numArtigosAlocados;
+	}
+
+	public void setNumArtigosAlocados(int numArtigosAlocados) {
+		this.numArtigosAlocados = numArtigosAlocados;
+	}
+
+	@Override
+	public int compareTo(Pesquisador other) {
+		int compareID = ((Pesquisador) other).getId();
+		int compareNumArtigos = ((Pesquisador) other).getNumArtigosAlocados();
+		
+		if(this.numArtigosAlocados == compareNumArtigos) {
+			return this.id-compareID + this.numArtigosAlocados-compareNumArtigos;
+		}
+			
+		if(other.numArtigosAlocados > 0 || this.numArtigosAlocados > 0) {
+			return this.numArtigosAlocados-compareNumArtigos;
+		}
+		else {
+
+			return this.id-compareID + this.numArtigosAlocados-compareNumArtigos;
+		}
+		
+			}
 }
