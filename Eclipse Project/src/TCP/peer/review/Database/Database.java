@@ -12,6 +12,9 @@ import TCP.peer.review.Logic.Pesquisador;
 
 public class Database {
 	
+	//Clase singleton
+	private static Database db;
+	
 	private final Map<Integer, Pesquisador> pesquisadores;
 	private final Map<Integer, Artigo> artigos;
 	private final Map<Integer, Conferencia> conferencias;
@@ -22,6 +25,22 @@ public class Database {
 	//0 = Modularity, 1 = Software Reuse, 2 = Aspect-oriented Programming, 3 = Software Product Lines,
 	//4 = Software Achitecture, 5 = Software Testing, 6 = Software Quality
 	
+	
+	public Pesquisador getPesquisador(int key)
+	{
+		return pesquisadores.get(key);
+	}
+
+	public Artigo getArtigo(int key)
+	{
+		return artigos.get(key);
+	}
+
+	public Conferencia getConferencias(int key) {
+		return conferencias.get(key);
+	}
+
+
 	//Universidades keys
 	//0 = UFRGS, 1 = USP, 2 = UFRJ
 	public Database() {
@@ -169,6 +188,16 @@ public class Database {
 		
 	}
 	
+	//Singleton
+	public static synchronized Database getInstance()
+	{
+		if(db == null)
+			db = new Database();
+		
+		return db;
+			
+	}
+	
 	
 	//Debug
 	public void printPesquisadores()
@@ -218,6 +247,8 @@ public class Database {
 					);
 		}
 	}
+	
+	
 		
 }
 
