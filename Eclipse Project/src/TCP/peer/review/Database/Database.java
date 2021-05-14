@@ -46,9 +46,9 @@ public class Database {
 	{
 		ArrayList<PeerReview> mergedList = new ArrayList<>();
 		
-		for(int k = 0; k < Alocacoes.size(); k++)
+		for(int k = 1 ; k <= Alocacoes.size(); k++)
 		{
-			mergedList.addAll(Alocacoes.get(k));
+			mergedList.addAll(Alocacoes.get(conferencias.get(k)));
 		}
 		
 		return mergedList;
@@ -58,10 +58,13 @@ public class Database {
 	{
 		int total = 0;
 		
-		for(int k = 0; k < Alocacoes.size(); k++)
+		
+		
+		for(int k = 1; k <= Alocacoes.size(); k++)
 		{
-			total = total + Alocacoes.get(k).size();
+			total = total + Alocacoes.get(conferencias.get(k)).size();
 		}
+		
 		
 		return total;
 	}

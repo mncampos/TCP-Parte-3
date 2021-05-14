@@ -29,6 +29,7 @@ public class AtribuirNota {
 
 		int i = 0;
 		String[] artigos = new String[Database.getInstance().getAlocacoesListTotalSize()];
+		
 		for (PeerReview p : Database.getInstance().MergeAlocacoes()) {
 
 			if (i >= 1) {
@@ -42,6 +43,7 @@ public class AtribuirNota {
 
 		}
 
+		
 		opcoesArtigos = new String[i];
 		for (int k = 0; k < opcoesArtigos.length; k++) {
 			opcoesArtigos[k] = artigos[k];
