@@ -68,8 +68,10 @@ public class AlocarArtigo {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				window.frame.dispose();
-				Database.getInstance().setPr(PeerReviewCommands.StartAlocation(confEscolhida, numEscolhido));
-				JScrollPane resultado = new JScrollPane(MontaTabelaAlocada(Database.getInstance().getPr()));
+				if(!(Database.getInstance().getAlocacoes(confEscolhida) == null))
+					showMessageDialog(null, "Alerta : Esta conferência já foi alocada.");
+				Database.getInstance().addAlocacoes(confEscolhida, PeerReviewCommands.StartAlocation(confEscolhida, numEscolhido)); //Aloca
+				JScrollPane resultado = new JScrollPane(MontaTabelaAlocada(Database.getInstance().getAlocacoes(confEscolhida)));
 				Windows window = new Windows(600, 600, "Resultado");
 				window.panel.add(resultado);
 				System.out.println("Fim da alocação.");

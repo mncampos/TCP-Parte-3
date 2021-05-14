@@ -28,8 +28,8 @@ public class AtribuirNota {
 		window.panel.add(texto);
 
 		int i = 0;
-		String[] artigos = new String[Database.getInstance().getPr().size()];
-		for (PeerReview p : Database.getInstance().getPr()) {
+		String[] artigos = new String[Database.getInstance().getAlocacoesListTotalSize()];
+		for (PeerReview p : Database.getInstance().MergeAlocacoes()) {
 
 			if (i >= 1) {
 				if (artigos[i - 1].equals(p.getArtigo().getTitulo())) {
@@ -57,7 +57,7 @@ public class AtribuirNota {
 			public void actionPerformed(ActionEvent e) {
 				int k = 0;
 				ArrayList<String> revisores = new ArrayList<>();
-				for (PeerReview pr : Database.getInstance().getPr())
+				for (PeerReview pr : Database.getInstance().MergeAlocacoes())
 					if (pr.getArtigo().getTitulo().equals(arts.getSelectedItem())) {
 						revisores.add(pr.getRevisores().getNome());
 						k++;

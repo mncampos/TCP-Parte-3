@@ -21,19 +21,49 @@ public class Database {
 	private final Map<Integer, Conferencia> conferencias;
 	private final Afiliacoes AfiliacoesMap = new Afiliacoes();
 	private final Topicos TopicosMap = new Topicos();
-	private  ArrayList<PeerReview> pr = new ArrayList<>();
+	private Map<Conferencia, ArrayList<PeerReview>> Alocacoes = new HashMap<Conferencia, ArrayList<PeerReview>>();
 	
 	//Topicos keys
 	//0 = Modularity, 1 = Software Reuse, 2 = Aspect-oriented Programming, 3 = Software Product Lines,
 	//4 = Software Achitecture, 5 = Software Testing, 6 = Software Quality
 	
 	
-	public void setPr(ArrayList<PeerReview> pr) {
-		this.pr = pr;
+
+	public ArrayList<PeerReview> getAlocacoes(Conferencia key) {
+		return Alocacoes.get(key);
+	}
+	
+	public void addAlocacoes(Conferencia conf, ArrayList<PeerReview> list)
+	{
+		Alocacoes.put(conf, list);
 	}
 
-	public ArrayList<PeerReview> getPr() {
-		return pr;
+	public void setAlocacoes(Map<Conferencia, ArrayList<PeerReview>> alocacoes) {
+		Alocacoes = alocacoes;
+	}
+
+	public ArrayList<PeerReview> MergeAlocacoes()  //Útil para printar todas as alocações feitas
+	{
+		ArrayList<PeerReview> mergedList = new ArrayList<>();
+		
+		for(int k = 0; k < Alocacoes.size(); k++)
+		{
+			mergedList.addAll(Alocacoes.get(k));
+		}
+		
+		return mergedList;
+	}
+	
+	public int getAlocacoesListTotalSize()
+	{
+		int total = 0;
+		
+		for(int k = 0; k < Alocacoes.size(); k++)
+		{
+			total = total + Alocacoes.get(k).size();
+		}
+		
+		return total;
 	}
 
 	public Pesquisador getPesquisador(int key)
