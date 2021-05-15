@@ -1,4 +1,4 @@
-package TCP.peer.review.Tests;
+package TCP.peer.review.UITests;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -7,11 +7,11 @@ import TCP.peer.review.Data.PeerReview;
 import TCP.peer.review.Database.Database;
 
 /**
- * Classe responsável pelos testes.
+ * Classe responsável pelos testes de interface.
  * @author Mateus, Raul, Germano
  *
  */
-public class Tests {
+public class UITests {
 
 	/**
 	 * Testa se a conferência já foi alocada. Se já foi, testa se há alguma revisão faltando.

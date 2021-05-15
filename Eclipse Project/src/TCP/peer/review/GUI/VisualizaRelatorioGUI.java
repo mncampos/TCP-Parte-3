@@ -11,7 +11,7 @@ import javax.swing.JTabbedPane;
 import TCP.peer.review.Data.Conferencia;
 import TCP.peer.review.Database.Database;
 import TCP.peer.review.Implementation.VisualizaRelatório;
-import TCP.peer.review.Tests.Tests;
+import TCP.peer.review.UITests.UITests;
 
 /**
  * Classe responsável pela parte gráfica da visualização das notas dos artigos.
@@ -39,7 +39,7 @@ public class VisualizaRelatorioGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				conf = Database.getInstance().getConferencias(1);
-				if (Tests.testConferencia(conf) == true)
+				if (UITests.testConferencia(conf) == true)
 					showRelatorio(conf);
 
 			}
@@ -49,7 +49,7 @@ public class VisualizaRelatorioGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				conf = Database.getInstance().getConferencias(2);
-				if (Tests.testConferencia(conf) == true)
+				if (UITests.testConferencia(conf) == true)
 					showRelatorio(conf);
 
 			}
@@ -59,7 +59,7 @@ public class VisualizaRelatorioGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				conf = Database.getInstance().getConferencias(3);
-				if (Tests.testConferencia(conf) == true)
+				if (UITests.testConferencia(conf) == true)
 					showRelatorio(conf);
 
 			}

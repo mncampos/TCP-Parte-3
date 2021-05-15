@@ -6,7 +6,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 import javax.swing.JButton;
 
-import TCP.peer.review.Tests.Tests;
+import TCP.peer.review.UITests.UITests;
 
 public class MainButton extends JButton {
 
@@ -46,7 +46,7 @@ public class MainButton extends JButton {
 			ActionListener atribNota = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if (Tests.testAlocacoes() == false)
+					if (UITests.testAlocacoes() == false)
 						showMessageDialog(null, "Nenhuma conferência foi alocada.");
 					else
 						AtribuiNotaGUI.execute();
