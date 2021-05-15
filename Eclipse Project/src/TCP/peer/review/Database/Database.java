@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import TCP.peer.review.Logic.Artigo;
-import TCP.peer.review.Logic.Conferencia;
-import TCP.peer.review.Logic.PeerReview;
-import TCP.peer.review.Logic.PeerReviewCommands;
-import TCP.peer.review.Logic.Pesquisador;
+import TCP.peer.review.Data.Artigo;
+import TCP.peer.review.Data.Conferencia;
+import TCP.peer.review.Data.PeerReview;
+import TCP.peer.review.Data.Pesquisador;
+import TCP.peer.review.Implementation.AlocaArtigo;
 
+/**
+ * Classe que representa o banco de dados. Foi utilizado o modelo singleton, visto que só há uma database no programa inteiro.
+ * Para chamá-la, usa-se o método Database.getInstance().
+ * @author Mateus, Raul, Germano
+ *
+ */
 public class Database {
 
 	// Clase singleton
@@ -27,9 +33,11 @@ public class Database {
 	// Software Product Lines,
 	// 4 = Software Achitecture, 5 = Software Testing, 6 = Software Quality
 
+
 	public Map<Conferencia, ArrayList<PeerReview>> getAlocacoesMap() {
 		return Alocacoes;
 	}
+	
 
 	public ArrayList<PeerReview> getAlocacoes(Conferencia key) {
 		return Alocacoes.get(key);
@@ -43,7 +51,7 @@ public class Database {
 		Alocacoes = alocacoes;
 	}
 
-	public ArrayList<PeerReview> MergeAlocacoes() // Útil para printar todas as alocações feitas
+	public ArrayList<PeerReview> MergeAlocacoes()
 	{
 		ArrayList<PeerReview> mergedList = new ArrayList<>();
 		int k = 1;
@@ -129,8 +137,8 @@ public class Database {
 		}
 
 		// Aloca as conferências iniciais
-		Alocacoes.put(conferencias.get(3), PeerReviewCommands.StartAlocation(conferencias.get(3), 2));
-		Alocacoes.put(conferencias.get(2), PeerReviewCommands.StartAlocation(conferencias.get(2), 2));
+		Alocacoes.put(conferencias.get(3), AlocaArtigo.alocaComitê(conferencias.get(3), 2));
+		Alocacoes.put(conferencias.get(2), AlocaArtigo.alocaComitê(conferencias.get(2), 2));
 
 		Alocacoes.get(conferencias.get(3)).get(0).setNota(2);
 		Alocacoes.get(conferencias.get(2)).get(0).setNota(2);

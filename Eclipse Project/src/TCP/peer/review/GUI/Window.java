@@ -7,9 +7,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 
-public class Windows {
+/**
+ * @author Mateus, Raul, Germano
+ * Classe responsável pelas janelas gráficas do programa.
+ */
+public class Window {
 
-	// Tamanho da janela principal
+	// Tamanho padrão do programa
 	private static final int windowHeight = 400;
 	private static final int windowWidth = 300;
 
@@ -17,16 +21,19 @@ public class Windows {
 	JPanel panel;
 	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-	public Windows() { // Construtor default : cria a janela principal
+	/**
+	 * Construtor vazio : Cria o menu principal
+	 */
+	public Window() {
 		this.frame = new JFrame("Peer Review");
 		panel = new JPanel();
 
 		frame.setSize(windowHeight, windowWidth);
 		frame.add(panel);
 
-		panel.add(new Button("Alocar Artigo a Membro do Comitê", 300, 50, 45, 50, 1));
-		panel.add(new Button("Atribuir Nota a Artigo", 300, 50, 45, 100, 2));
-		panel.add(new Button("Visualizar Relatório de Artigos", 300, 50, 45, 150, 3));
+		panel.add(new MainButton("Alocar Artigo a Membro do Comitê", 300, 50, 45, 50, 1));
+		panel.add(new MainButton("Atribuir Nota a Artigo", 300, 50, 45, 100, 2));
+		panel.add(new MainButton("Visualizar Relatório de Artigos", 300, 50, 45, 150, 3));
 
 		panel.setLayout(null);
 		frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
@@ -35,9 +42,13 @@ public class Windows {
 		frame.setVisible(true);
 	}
 
-	// Construtor para outras janelas, recebe um inteiro que identifica o tipo de
-	// janela. 1 = Janela vazia de tamanho original 2 = Janela de input básica
-	public Windows(int op) {
+
+	/**
+	 * Construtor parametrizado com um inteiro : Cria uma janela vazia padrão.
+	 * Código escalável para adicionar novas janelas caso necessário.
+	 * @param op : Default 1 -> Janela vazia
+	 */
+	public Window(int op) {
 		switch (op) {
 
 		case 1:
@@ -55,7 +66,13 @@ public class Windows {
 
 	}
 
-	public Windows(int Height, int Width, String name) {
+	/**
+	 * Construtor parametrizado : Cria uma janela customizada com os parâmetros passados
+	 * @param Height : Altura (int)
+	 * @param Width : Largura (int)
+	 * @param name : Nome (String)
+	 */
+	public Window(int Height, int Width, String name) {
 
 		frame = new JFrame(name);
 		panel = new JPanel();

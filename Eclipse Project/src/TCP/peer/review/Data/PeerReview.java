@@ -1,9 +1,14 @@
-package TCP.peer.review.Logic;
+package TCP.peer.review.Data;
 
+/**
+ * Classe que representa o relacionamento Artigo x Revisor.
+ * @author Mateus, Raul, Germano
+ *
+ */
 public class PeerReview {
 
 	private Artigo artigo;
-	private Pesquisador revisores;
+	private Pesquisador revisor;
 	private Conferencia conferencia;
 	private Integer Nota = null;
 
@@ -24,11 +29,11 @@ public class PeerReview {
 	}
 
 	public Pesquisador getRevisores() {
-		return revisores;
+		return revisor;
 	}
 
 	public void setRevisores(Pesquisador revisores) {
-		this.revisores = revisores;
+		this.revisor = revisores;
 	}
 
 	public Integer getNota() {
@@ -41,18 +46,18 @@ public class PeerReview {
 
 	public PeerReview(Artigo artigo, Pesquisador revisores) {
 		this.artigo = artigo;
-		this.revisores = revisores;
+		this.revisor = revisores;
 	}
 
 	public PeerReview(Artigo artigo, Pesquisador revisores, int nota) {
 		this.artigo = artigo;
-		this.revisores = revisores;
+		this.revisor = revisores;
 		Nota = nota;
 	}
 
 	public PeerReview(Artigo artigo, Pesquisador revisores, Conferencia conf) {
 		this.artigo = artigo;
-		this.revisores = revisores;
+		this.revisor = revisores;
 		this.conferencia = conf;
 	}
 

@@ -11,20 +11,25 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 
+import TCP.peer.review.Data.PeerReview;
 import TCP.peer.review.Database.Database;
-import TCP.peer.review.Logic.PeerReview;
-import TCP.peer.review.Logic.PeerReviewCommands;
+import TCP.peer.review.Implementation.AtribuiNota;
 
-public class AtribuirNota {
+/**
+ * @author Mateus, Raul, Germano
+ * Código da interface gráfica da funçao de atribuição de notas.
+ *
+ */
+public class AtribuiNotaGUI {
 
-	Windows window;
+	Window window;
 	PeerReview artigoEscolhido;
 	String[] opcoesArtigos;
 	String[] opcoesRevisores;
 	String[] notas = { "-3", "-2", "-1", "0", "1", "2", "3" };
 
-	public AtribuirNota() {
-		window = new Windows(600, 100, "Atribuir Nota");
+	public AtribuiNotaGUI() {
+		window = new Window(600, 100, "Atribuir Nota");
 
 		JTextArea texto = new JTextArea("Favor escolher o artigo e o revisor : ");
 		texto.setEditable(false);
@@ -94,7 +99,7 @@ public class AtribuirNota {
 				else
 					showMessageDialog(null, "Nota alterada com sucesso.");
 
-				PeerReviewCommands.AtribuiNota(artigoEscolhido,
+				AtribuiNota.giveNota(artigoEscolhido,
 						Integer.parseInt((String) opcoesNotas.getSelectedItem()));
 
 			}
@@ -108,12 +113,20 @@ public class AtribuirNota {
 
 	}
 
+	/**
+	 * @param revisores
+	 * Atualiza a JComboBox e o JPanel dos revisores quando o usuário muda de artigo.
+	 */
 	public void handleSelectEvent(JComboBox<String> revisores) {
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(opcoesRevisores);
 		revisores.setModel(model);
 		window.panel.updateUI();
 	}
 
+	/**
+	 * @param artigoSelecionado
+	 * Atualiza os revisores na variável da classe quando o usuário troca de artigo.
+	 */
 	public void updateRevisores(JComboBox<String> artigoSelecionado) {
 		ArrayList<String> revisores = new ArrayList<>();
 		for (PeerReview pr : Database.getInstance().MergeAlocacoes())
@@ -128,7 +141,8 @@ public class AtribuirNota {
 		}
 	}
 
+	
 	public static void execute() {
-		new AtribuirNota();
+		new AtribuiNotaGUI();
 	}
 }

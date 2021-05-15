@@ -13,20 +13,20 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
+import TCP.peer.review.Data.Conferencia;
+import TCP.peer.review.Data.PeerReview;
 import TCP.peer.review.Database.Database;
-import TCP.peer.review.Logic.Conferencia;
-import TCP.peer.review.Logic.PeerReview;
-import TCP.peer.review.Logic.PeerReviewCommands;
+import TCP.peer.review.Implementation.AlocaArtigo;
 
-public class AlocarArtigo {
+public class AlocaArtigoGUI {
 
 	// Valores default para o seletor
 	Conferencia confEscolhida = Database.getInstance().getConferencias(1);
 	int numEscolhido = 2;
-	Windows window;
+	Window window;
 
-	public AlocarArtigo() {
-		window = new Windows(500, 100, "Alocação de Artigo");
+	public AlocaArtigoGUI() {
+		window = new Window(500, 100, "Alocação de Artigo");
 
 		JTextArea texto = new JTextArea("Favor escolher a conferência e a quantidade de revisores");
 		texto.setEditable(false);
@@ -74,12 +74,11 @@ public class AlocarArtigo {
 					window.frame.dispose();
 				} else {
 					Database.getInstance().addAlocacoes(confEscolhida,
-							PeerReviewCommands.StartAlocation(confEscolhida, numEscolhido)); // Aloca
+							AlocaArtigo.alocaComitê(confEscolhida, numEscolhido)); // Aloca
 					JScrollPane resultado = new JScrollPane(
 							MontaTabelaAlocada(Database.getInstance().getAlocacoes(confEscolhida)));
-					Windows window = new Windows(600, 600, "Resultado - " + confEscolhida.getSigla());
+					Window window = new Window(600, 600, "Resultado - " + confEscolhida.getSigla());
 					window.panel.add(resultado);
-					System.out.println("Fim da alocação.");
 					showMessageDialog(null, "Operação realizada com sucesso.");
 				}
 			}
@@ -88,7 +87,7 @@ public class AlocarArtigo {
 
 	}
 
-	private static JTable MontaTabelaAlocada(ArrayList<PeerReview> ListaDeAlocacao) {
+	public static JTable MontaTabelaAlocada(ArrayList<PeerReview> ListaDeAlocacao) {
 		String[] tituloColunas = { "Artigo", "Revisor" };
 		DefaultTableModel model = new DefaultTableModel(tituloColunas, 0);
 
@@ -100,13 +99,10 @@ public class AlocarArtigo {
 
 			model.addRow(data);
 		}
-
 		return new JTable(model);
-
 	}
 
 	public static void execute() {
-		new AlocarArtigo();
-
+		new AlocaArtigoGUI();
 	}
 }
