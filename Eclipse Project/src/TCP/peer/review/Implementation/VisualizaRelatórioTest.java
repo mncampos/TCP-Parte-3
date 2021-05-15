@@ -2,25 +2,28 @@ package TCP.peer.review.Implementation;
 
 import static org.junit.Assert.*;
 
-import javax.swing.JTable;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import TCP.peer.review.Data.PeerReview;
 import TCP.peer.review.Database.Database;
 
 public class VisualizaRelatórioTest {
 	
-	JTable testTable;
+	ArrayList<PeerReview> alocacoesTest;
 
 	@Before
 	public void setUp() throws Exception {
-		testTable = VisualizaRelatório.montaTabelaAceitos("Teste Aceitos", Database.getInstance().getConferencias(2));
+		alocacoesTest = AlocaArtigo.alocaComitê(Database.getInstance().getConferencias(3), 2);
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testMedia() {
+		AtribuiNota.giveNota(alocacoesTest.get(0), 2);
+		AtribuiNota.giveNota(alocacoesTest.get(1), 3);
+		assertEquals(2.5, VisualizaRelatório.getMedia(alocacoesTest.get(0).getArtigo(), alocacoesTest) , 0.1);
 	}
 
 }
