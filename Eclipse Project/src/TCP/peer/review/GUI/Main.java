@@ -1,14 +1,13 @@
 package TCP.peer.review.GUI;
 
+import TCP.peer.review.Database.Database;
 
 public class Main {
 
 	public static void main(String[] args) {
-	
-		new Windows();
-		
-	
 
+		Database.getInstance();
+		new Windows();
 	}
 
 }

@@ -10,7 +10,7 @@ public class Pesquisador implements Comparable<Pesquisador> {
 	private String afiliacao;
 	private ArrayList<String> TopicosDePesquisa;
 	private int numArtigosAlocados;
-	
+
 	public Pesquisador(Integer id, String nome, String afiliacao, ArrayList<String> topicosDePesquisa) {
 		this.id = id;
 		this.nome = nome;
@@ -49,36 +49,30 @@ public class Pesquisador implements Comparable<Pesquisador> {
 	public void setTopicosDePesquisa(ArrayList<String> topicosDePesquisa) {
 		TopicosDePesquisa = topicosDePesquisa;
 	}
-	
-	
 
 	public void setNumArtigosAlocados(int numArtigosAlocados) {
 		this.numArtigosAlocados = numArtigosAlocados;
 	}
 
-
-	public int getNumArtigosAlocados()
-	{
+	public int getNumArtigosAlocados() {
 		return numArtigosAlocados;
 	}
-
 
 	@Override
 	public int compareTo(Pesquisador other) {
 		int compareID = ((Pesquisador) other).getId();
 		int compareNumArtigos = ((Pesquisador) other).getNumArtigosAlocados();
-		
-		if(this.numArtigosAlocados == compareNumArtigos) {
-			return this.id-compareID + this.numArtigosAlocados-compareNumArtigos;
-		}
-			
-		if(other.numArtigosAlocados > 0 || this.numArtigosAlocados > 0) {
-			return this.numArtigosAlocados-compareNumArtigos;
-		}
-		else {
 
-			return this.id-compareID + this.numArtigosAlocados-compareNumArtigos;
+		if (this.numArtigosAlocados == compareNumArtigos) {
+			return this.id - compareID + this.numArtigosAlocados - compareNumArtigos;
 		}
-		
-			}
+
+		if (other.numArtigosAlocados > 0 || this.numArtigosAlocados > 0) {
+			return this.numArtigosAlocados - compareNumArtigos;
+		} else {
+
+			return this.id - compareID + this.numArtigosAlocados - compareNumArtigos;
+		}
+
+	}
 }

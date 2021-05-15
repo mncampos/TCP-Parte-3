@@ -2,7 +2,6 @@ package TCP.peer.review.GUI;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
-import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -10,11 +9,9 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import TCP.peer.review.Database.Database;
-import TCP.peer.review.Logic.Artigo;
 import TCP.peer.review.Logic.PeerReview;
 import TCP.peer.review.Logic.PeerReviewCommands;
 

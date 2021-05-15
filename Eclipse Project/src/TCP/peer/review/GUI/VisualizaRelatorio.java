@@ -66,8 +66,8 @@ public class VisualizaRelatorio {
 
 		window = new Windows(600, 600, "Relatório");
 		JTabbedPane tabbedPanel = new JTabbedPane();
-		JScrollPane tabelaAceitos = new JScrollPane(montaTabela("Aceitos", conf));
-		JScrollPane tabelaRejeitados = new JScrollPane(montaTabela("Rejeitados", conf));
+		JScrollPane tabelaAceitos = new JScrollPane(montaTabelaAceitos("Aceitos", conf));
+		JScrollPane tabelaRejeitados = new JScrollPane(montaTabelaRejeitados("Rejeitados", conf));
 		tabbedPanel.addTab("Aceitos", tabelaAceitos);
 		tabbedPanel.addTab("Rejeitados", tabelaRejeitados);
 
@@ -100,18 +100,112 @@ public class VisualizaRelatorio {
 		}
 	}
 
-	private static JTable montaTabela(String nome, Conferencia conf) {
+	private static JTable montaTabelaAceitos(String nome, Conferencia conf) {
 
 		String[] tituloColunas = { nome, "Nota" };
 		DefaultTableModel model = new DefaultTableModel(tituloColunas, 0);
 
-		for (int i = 0; i < Database.getInstance().getAlocacoes(conf).size(); i++) {
-			String titulo = Database.getInstance().getAlocacoes(conf).get(i).getArtigo().getTitulo();
-			int Nota = Database.getInstance().getAlocacoes(conf).get(i).getNota();
+		for (int j = 0; j < Database.getInstance().getAlocacoes(conf).size(); j++) {
 
-			Object[] data = { titulo, Nota };
+			float media = 0;
+			int i;
+			int counter = 0;
 
-			model.addRow(data);
+			if (j >= 1)
+				if (Database.getInstance().getAlocacoes(conf).get(j - 1).getArtigo().getTitulo()
+						.equals(Database.getInstance().getAlocacoes(conf).get(j).getArtigo().getTitulo()))
+					continue;
+
+			Boolean flag = false; // Se foi alocado
+
+			for (i = j; i < Database.getInstance().getAlocacoes(conf).size(); i++) {
+				if (i - 1 == -1) {
+					media += Database.getInstance().getAlocacoes(conf).get(i).getNota();
+					counter++;
+					continue;
+				}
+
+				if (flag == false) {
+					media += Database.getInstance().getAlocacoes(conf).get(i).getNota();
+					flag = true;
+					counter++;
+					continue;
+				}
+
+				else if (Database.getInstance().getAlocacoes(conf).get(i - 1).getArtigo().getTitulo()
+						.equals(Database.getInstance().getAlocacoes(conf).get(i).getArtigo().getTitulo())) {
+					counter++;
+					media += Database.getInstance().getAlocacoes(conf).get(i).getNota();
+				} else
+					break;
+			}
+
+			media = media / counter;
+
+			if (media >= 0) {
+				String titulo = Database.getInstance().getAlocacoes(conf).get(j).getArtigo().getTitulo();
+				float Nota = media;
+
+				Object[] data = { titulo, Nota };
+
+				model.addRow(data);
+			}
+		}
+
+		return new JTable(model);
+
+	}
+
+	private static JTable montaTabelaRejeitados(String nome, Conferencia conf) {
+
+		String[] tituloColunas = { nome, "Nota" };
+		DefaultTableModel model = new DefaultTableModel(tituloColunas, 0);
+
+		for (int j = 0; j < Database.getInstance().getAlocacoes(conf).size(); j++) {
+
+			float media = 0;
+			int i;
+			int counter = 0;
+
+			if (j >= 1)
+				if (Database.getInstance().getAlocacoes(conf).get(j - 1).getArtigo().getTitulo()
+						.equals(Database.getInstance().getAlocacoes(conf).get(j).getArtigo().getTitulo()))
+					continue;
+
+			Boolean flag = false; // Se foi alocado
+
+			for (i = j; i < Database.getInstance().getAlocacoes(conf).size(); i++) {
+				if (i - 1 == -1) {
+					media += Database.getInstance().getAlocacoes(conf).get(i).getNota();
+					counter++;
+					continue;
+				}
+
+				if (flag == false) {
+					media += Database.getInstance().getAlocacoes(conf).get(i).getNota();
+					flag = true;
+					counter++;
+					continue;
+				}
+
+				else if (Database.getInstance().getAlocacoes(conf).get(i - 1).getArtigo().getTitulo()
+						.equals(Database.getInstance().getAlocacoes(conf).get(i).getArtigo().getTitulo())) {
+					counter++;
+					media += Database.getInstance().getAlocacoes(conf).get(i).getNota();
+				} else
+					break;
+			}
+
+			media = media / counter;
+
+			if (media < 0) {
+				String titulo = Database.getInstance().getAlocacoes(conf).get(j).getArtigo().getTitulo();
+				float Nota = media;
+
+				Object[] data = { titulo, Nota };
+
+				model.addRow(data);
+			}
 		}
 
 		return new JTable(model);
