@@ -1,8 +1,6 @@
 package TCP.peer.review.Logic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Pesquisador implements Comparable<Pesquisador> {
 	private Integer id;
