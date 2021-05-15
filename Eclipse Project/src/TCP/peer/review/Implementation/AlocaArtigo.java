@@ -9,6 +9,8 @@ import TCP.peer.review.Data.Conferencia;
 import TCP.peer.review.Data.PeerReview;
 import TCP.peer.review.Data.Pesquisador;
 
+
+
 /**
  * 
  * Classe responsável pela funcionalidade de alocação de artigos no comitê.
@@ -85,5 +87,7 @@ public class AlocaArtigo {
 		System.out.println("Fim da Alocação.");
 		return comitê;
 	}
+	
+
 
 }

@@ -1,9 +1,13 @@
 package TCP.peer.review.Implementation;
 
+import java.util.ArrayList;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import TCP.peer.review.Data.Artigo;
 import TCP.peer.review.Data.Conferencia;
+import TCP.peer.review.Data.PeerReview;
 import TCP.peer.review.Database.Database;
 
 /**
@@ -27,40 +31,14 @@ public class VisualizaRelatório {
 		for (int j = 0; j < Database.getInstance().getAlocacoes(conf).size(); j++) {
 	
 			float media = 0;
-			int i;
-			int counter = 0;
 	
 			if (j >= 1)
 				if (Database.getInstance().getAlocacoes(conf).get(j - 1).getArtigo().getTitulo()
 						.equals(Database.getInstance().getAlocacoes(conf).get(j).getArtigo().getTitulo()))
 					continue;
-	
-			Boolean flag = false; // Se foi alocado
-	
-			for (i = j; i < Database.getInstance().getAlocacoes(conf).size(); i++) {
-				if (i - 1 == -1) {
-					media += Database.getInstance().getAlocacoes(conf).get(i).getNota();
-					counter++;
-					continue;
-				}
-	
-				if (flag == false) {
-					media += Database.getInstance().getAlocacoes(conf).get(i).getNota();
-					flag = true;
-					counter++;
-					continue;
-				}
-	
-				else if (Database.getInstance().getAlocacoes(conf).get(i - 1).getArtigo().getTitulo()
-						.equals(Database.getInstance().getAlocacoes(conf).get(i).getArtigo().getTitulo())) {
-					counter++;
-					media += Database.getInstance().getAlocacoes(conf).get(i).getNota();
-				} else
-					break;
-			}
-	
-			media = media / counter;
-	
+
+			media = getMedia(Database.getInstance().getAlocacoes(conf).get(j).getArtigo(), Database.getInstance().getAlocacoes(conf));
+			
 			if (media >= 0) {
 				String titulo = Database.getInstance().getAlocacoes(conf).get(j).getArtigo().getTitulo();
 				float Nota = media;
@@ -74,6 +52,35 @@ public class VisualizaRelatório {
 		return new JTable(model);
 	
 	}
+	
+	/**
+	 * Calcula a média de um dado artigo, precisa de uma lista de artigos alocados. Se o artigo não existir, retorna -10.
+	 * @param artigo
+	 * @param alocacoes
+	 * @return
+	 */
+	public static float getMedia(Artigo artigo, ArrayList<PeerReview> alocacoes)
+	{
+		float media = 0;
+		int counter = 0;
+		
+		for(PeerReview pr : alocacoes)
+		{
+			if(pr.getArtigo().equals(artigo)) {
+				media += pr.getNota();
+				counter++;
+		}
+				
+		}
+		
+		if(counter == 0)
+			return -10;
+		
+		return media/counter;
+		
+	}
+	
+	
 
 	/**
 	 * Retorna uma tabela contendo os artigos de nota menor que 0.
@@ -89,39 +96,14 @@ public class VisualizaRelatório {
 		for (int j = 0; j < Database.getInstance().getAlocacoes(conf).size(); j++) {
 	
 			float media = 0;
-			int i;
-			int counter = 0;
+
 	
 			if (j >= 1)
 				if (Database.getInstance().getAlocacoes(conf).get(j - 1).getArtigo().getTitulo()
 						.equals(Database.getInstance().getAlocacoes(conf).get(j).getArtigo().getTitulo()))
 					continue;
 	
-			Boolean flag = false; // Se foi alocado
-	
-			for (i = j; i < Database.getInstance().getAlocacoes(conf).size(); i++) {
-				if (i - 1 == -1) {
-					media += Database.getInstance().getAlocacoes(conf).get(i).getNota();
-					counter++;
-					continue;
-				}
-	
-				if (flag == false) {
-					media += Database.getInstance().getAlocacoes(conf).get(i).getNota();
-					flag = true;
-					counter++;
-					continue;
-				}
-	
-				else if (Database.getInstance().getAlocacoes(conf).get(i - 1).getArtigo().getTitulo()
-						.equals(Database.getInstance().getAlocacoes(conf).get(i).getArtigo().getTitulo())) {
-					counter++;
-					media += Database.getInstance().getAlocacoes(conf).get(i).getNota();
-				} else
-					break;
-			}
-	
-			media = media / counter;
+			media = getMedia(Database.getInstance().getAlocacoes(conf).get(j).getArtigo(), Database.getInstance().getAlocacoes(conf));
 	
 			if (media < 0) {
 				String titulo = Database.getInstance().getAlocacoes(conf).get(j).getArtigo().getTitulo();
@@ -135,6 +117,7 @@ public class VisualizaRelatório {
 	
 		return new JTable(model);
 	
+		
 	}
 
 }
