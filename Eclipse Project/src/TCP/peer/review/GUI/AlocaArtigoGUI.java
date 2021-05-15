@@ -70,9 +70,9 @@ public class AlocaArtigoGUI {
 			public void actionPerformed(ActionEvent e) {
 
 				if (!(Database.getInstance().getAlocacoes(confEscolhida) == null)) {
-					showMessageDialog(null, "Alerta : Esta conferência já foi alocada.");
+					showMessageDialog(null, "Alerta : Esta conferência já foi alocada. \nAlocando novamente com as novas configurações.");
 					window.frame.dispose();
-				} else {
+				} 
 					Database.getInstance().addAlocacoes(confEscolhida,
 							AlocaArtigo.alocaComitê(confEscolhida, numEscolhido)); // Aloca
 					JScrollPane resultado = new JScrollPane(
@@ -80,7 +80,7 @@ public class AlocaArtigoGUI {
 					Window window = new Window(600, 600, "Resultado - " + confEscolhida.getSigla());
 					window.panel.add(resultado);
 					showMessageDialog(null, "Operação realizada com sucesso.");
-				}
+				
 			}
 		});
 		window.panel.add(okbutton);

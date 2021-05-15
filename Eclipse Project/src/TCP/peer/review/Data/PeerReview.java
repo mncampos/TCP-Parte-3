@@ -60,5 +60,14 @@ public class PeerReview {
 		this.revisor = revisores;
 		this.conferencia = conf;
 	}
+	
+	public PeerReview(Artigo artigo, Pesquisador revisor, Conferencia conf, Integer nota)
+	{
+		this.artigo = artigo;
+		this.revisor = revisor;
+		this.conferencia = conf;
+		this.Nota = nota;
+		
+	}
 
 }
