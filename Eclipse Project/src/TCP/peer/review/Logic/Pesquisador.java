@@ -1,16 +1,16 @@
 package TCP.peer.review.Logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Pesquisador implements Comparable<Pesquisador> {
 	private Integer id;
 	private String nome;
 	private String afiliacao;
 	private ArrayList<String> TopicosDePesquisa;
-	private int numArtigosAlocados = 0;
+	private int numArtigosAlocados;
 	
-
-
 	public Pesquisador(Integer id, String nome, String afiliacao, ArrayList<String> topicosDePesquisa) {
 		this.id = id;
 		this.nome = nome;
@@ -52,13 +52,16 @@ public class Pesquisador implements Comparable<Pesquisador> {
 	
 	
 
-	public int getNumArtigosAlocados() {
-		return numArtigosAlocados;
-	}
-
 	public void setNumArtigosAlocados(int numArtigosAlocados) {
 		this.numArtigosAlocados = numArtigosAlocados;
 	}
+
+
+	public int getNumArtigosAlocados()
+	{
+		return numArtigosAlocados;
+	}
+
 
 	@Override
 	public int compareTo(Pesquisador other) {

@@ -5,6 +5,8 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
@@ -67,16 +69,19 @@ public class AlocarArtigo {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				window.frame.dispose();
-				if(!(Database.getInstance().getAlocacoes(confEscolhida) == null))
+				
+				if(!(Database.getInstance().getAlocacoes(confEscolhida) == null)) {
 					showMessageDialog(null, "Alerta : Esta conferência já foi alocada.");
+					window.frame.dispose();
+				}
+				else {
 				Database.getInstance().addAlocacoes(confEscolhida, PeerReviewCommands.StartAlocation(confEscolhida, numEscolhido)); //Aloca
 				JScrollPane resultado = new JScrollPane(MontaTabelaAlocada(Database.getInstance().getAlocacoes(confEscolhida)));
-				Windows window = new Windows(600, 600, "Resultado");
+				Windows window = new Windows(600, 600, "Resultado - " + confEscolhida.getSigla());
 				window.panel.add(resultado);
 				System.out.println("Fim da alocação.");
 				showMessageDialog(null, "Operação realizada com sucesso.");
-
+				}
 			}
 		});
 		window.panel.add(okbutton);

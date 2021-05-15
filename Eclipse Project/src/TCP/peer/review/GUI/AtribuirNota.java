@@ -2,16 +2,21 @@ package TCP.peer.review.GUI;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
+import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import TCP.peer.review.Database.Database;
 import TCP.peer.review.Logic.Artigo;
 import TCP.peer.review.Logic.PeerReview;
+import TCP.peer.review.Logic.PeerReviewCommands;
 
 public class AtribuirNota {
 
@@ -19,17 +24,18 @@ public class AtribuirNota {
 	PeerReview artigoEscolhido;
 	String[] opcoesArtigos;
 	String[] opcoesRevisores;
+	String[] notas = { "-3", "-2", "-1", "0", "1", "2", "3" };
 
 	public AtribuirNota() {
-		window = new Windows(500, 100, "Atribuir Nota");
+		window = new Windows(600, 100, "Atribuir Nota");
 
-		JTextArea texto = new JTextArea("Favor escolher o artigo que receberá a nota.");
+		JTextArea texto = new JTextArea("Favor escolher o artigo e o revisor : ");
 		texto.setEditable(false);
 		window.panel.add(texto);
 
 		int i = 0;
 		String[] artigos = new String[Database.getInstance().getAlocacoesListTotalSize()];
-		
+
 		for (PeerReview p : Database.getInstance().MergeAlocacoes()) {
 
 			if (i >= 1) {
@@ -43,44 +49,89 @@ public class AtribuirNota {
 
 		}
 
-		
 		opcoesArtigos = new String[i];
 		for (int k = 0; k < opcoesArtigos.length; k++) {
 			opcoesArtigos[k] = artigos[k];
 
 		}
 
-		JComboBox arts = new JComboBox<Object>(opcoesArtigos);
+		JComboBox<String> arts = new JComboBox<String>(opcoesArtigos);
 		arts.setSelectedIndex(0);
+		updateRevisores(arts);
+
+		JComboBox<String> revs = new JComboBox<String>(opcoesRevisores);
+		revs.setSelectedIndex(0);
 
 		arts.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int k = 0;
-				ArrayList<String> revisores = new ArrayList<>();
-				for (PeerReview pr : Database.getInstance().MergeAlocacoes())
-					if (pr.getArtigo().getTitulo().equals(arts.getSelectedItem())) {
-						revisores.add(pr.getRevisores().getNome());
-						k++;
+				updateRevisores(arts);
+				handleSelectEvent(revs);
+
+			}
+
+		});
+
+		JComboBox<String> opcoesNotas = new JComboBox<String>(notas);
+		opcoesNotas.setSelectedIndex(0);
+
+		JButton okButton = new JButton("Ok");
+		okButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				for (PeerReview p : Database.getInstance().MergeAlocacoes()) {
+
+					if (p.getArtigo().getTitulo().equals(arts.getSelectedItem())
+							&& p.getRevisores().getNome().equals(revs.getSelectedItem())) {
+						artigoEscolhido = p;
+						break;
 					}
 
-				opcoesRevisores = new String[revisores.size()];
+				}
 
-				for (int j = 0; j < opcoesRevisores.length; j++)
-					opcoesRevisores[j] = revisores.get(j);
+				if (artigoEscolhido.getNota() == null)
+					showMessageDialog(null, "Nota atribuida com sucesso.");
+				else
+					showMessageDialog(null, "Nota alterada com sucesso.");
+
+				PeerReviewCommands.AtribuiNota(artigoEscolhido,
+						Integer.parseInt((String) opcoesNotas.getSelectedItem()));
 
 			}
 
 		});
 
 		window.panel.add(arts);
+		window.panel.add(revs);
+		window.panel.add(opcoesNotas);
+		window.panel.add(okButton);
 
 	}
 
-	public static void execute() {
-		AtribuirNota atrib = new AtribuirNota();
-		showMessageDialog(null, "Favor selecione o artigo que receberá a nota.");
+	public void handleSelectEvent(JComboBox<String> revisores) {
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(opcoesRevisores);
+		revisores.setModel(model);
+		window.panel.updateUI();
+	}
 
+	public void updateRevisores(JComboBox<String> artigoSelecionado) {
+		ArrayList<String> revisores = new ArrayList<>();
+		for (PeerReview pr : Database.getInstance().MergeAlocacoes())
+			if (pr.getArtigo().getTitulo().equals(artigoSelecionado.getSelectedItem())) {
+				revisores.add(pr.getRevisores().getNome());
+			}
+
+		opcoesRevisores = new String[revisores.size()];
+
+		for (int j = 0; j < opcoesRevisores.length; j++) {
+			opcoesRevisores[j] = revisores.get(j);
+		}
+	}
+
+	public static void execute() {
+		new AtribuirNota();
 	}
 }

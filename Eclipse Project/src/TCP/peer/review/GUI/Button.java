@@ -2,8 +2,11 @@ package TCP.peer.review.GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 import javax.swing.JButton;
+
+import TCP.peer.review.Database.Database;
 
 public class Button extends JButton {
 
@@ -35,7 +38,10 @@ public class Button extends JButton {
 			ActionListener atribNota = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					AtribuirNota.execute();
+					if (Database.getInstance().getAlocacoesListTotalSize() == 0)
+						showMessageDialog(null, "Nenhuma conferência foi alocada.");
+					else
+						AtribuirNota.execute();
 				}
 			};
 			this.addActionListener(atribNota);
@@ -46,13 +52,13 @@ public class Button extends JButton {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					VisualizaRelatorio.execute();
-					
+
 				}
 			};
 			this.addActionListener(visualizaRelatorio);
 			break;
-		
-		case 0: 
+
+		case 0:
 			break;
 
 		}

@@ -28,6 +28,10 @@ public class Database {
 	//4 = Software Achitecture, 5 = Software Testing, 6 = Software Quality
 	
 	
+	public Map<Conferencia, ArrayList<PeerReview>> getAlocacoesMap()
+	{
+		return Alocacoes;
+	}
 
 	public ArrayList<PeerReview> getAlocacoes(Conferencia key) {
 		return Alocacoes.get(key);
@@ -172,7 +176,7 @@ public class Database {
 		Pesquisadores.put(9, p9);
 		TopicosList.clear();
 		
-		TopicosList.add(3);	TopicosList.add(5);		
+		TopicosList.add(3);	TopicosList.add(5); TopicosList.add(5);		
 		Pesquisador p10 = new Pesquisador(id++, "Carlos",AfiliacoesMap.GetUniversidade(1),TopicosMap.GetTopicos(TopicosList));
 		Pesquisadores.put(10,p10);
 		TopicosList.clear();

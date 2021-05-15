@@ -12,6 +12,12 @@ public class PeerReviewCommands {
 		ArrayList<Artigo> artigosSubmetidos = new ArrayList<Artigo>(conf.getArtigosSubmetidos()); //Artigos submetidos na conferência
 		ArrayList<PeerReview> alocacaoTotal = new ArrayList<PeerReview>();						  //Lista usada para armazenar os revisores
 
+		//Garante que não há nenhuma artigo alocado no comitê
+		for (Pesquisador p : conf.getComitê())
+		{
+			p.setNumArtigosAlocados(0);
+		}
+		
 		System.out.println("Iniciando a alocação.\n");
 		for (Artigo a : artigosSubmetidos) { //Para cada artigo da lista de artigos submetidos
 
@@ -40,7 +46,7 @@ public class PeerReviewCommands {
 				Collections.sort(Candidatos);
 
 				//Aloca o primeiro candidato da lista e recomeça o loop
-				alocacaoTotal.add(new PeerReview(a, Candidatos.get(0)));
+				alocacaoTotal.add(new PeerReview(a, Candidatos.get(0), conf));
 				Candidatos.get(0).setNumArtigosAlocados(Candidatos.get(0).getNumArtigosAlocados() + 1);
 				System.out.println(
 						"Artigo de ID " + a.getId() + " alocado ao revisor de ID " + Candidatos.get(0).getId());
@@ -53,9 +59,9 @@ public class PeerReviewCommands {
 	}
 
 	
-	public static void AtribuiNota()
+	public static void AtribuiNota(PeerReview artigo, int Nota)
 	{
-		//Fazer
+		artigo.setNota(Nota);
 	}
 	
 	public static void VisualizaRelatorio()
