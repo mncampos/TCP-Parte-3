@@ -137,20 +137,28 @@ public class Database {
 		}
 
 		// Aloca as conferências iniciais
-		Alocacoes.put(conferencias.get(3), AlocaArtigo.alocaComitê(conferencias.get(3), 2));
-		Alocacoes.put(conferencias.get(2), AlocaArtigo.alocaComitê(conferencias.get(2), 2));
-
-		Alocacoes.get(conferencias.get(3)).get(0).setNota(2);
-		Alocacoes.get(conferencias.get(2)).get(0).setNota(2);
-		Alocacoes.get(conferencias.get(2)).get(1).setNota(3);
-		Alocacoes.get(conferencias.get(2)).get(2).setNota(-1);
-		Alocacoes.get(conferencias.get(2)).get(3).setNota(1);
-		Alocacoes.get(conferencias.get(2)).get(4).setNota(1);
-		Alocacoes.get(conferencias.get(2)).get(5).setNota(0);
-		Alocacoes.get(conferencias.get(2)).get(6).setNota(-3);
-		Alocacoes.get(conferencias.get(2)).get(7).setNota(-3);
-		Alocacoes.get(conferencias.get(2)).get(8).setNota(-1);
-		Alocacoes.get(conferencias.get(2)).get(9).setNota(0);
+		ArrayList<PeerReview> alocacoesIniciais = new ArrayList<>();
+		alocacoesIniciais.add(new PeerReview(artigos.get(1), pesquisadores.get(8), conferencias.get(3), 2));
+		alocacoesIniciais.add(new PeerReview(artigos.get(1), pesquisadores.get(10), conferencias.get(3), null));
+		Alocacoes.put(conferencias.get(3), alocacoesIniciais);
+		
+		
+		alocacoesIniciais = new ArrayList<>();
+		
+		alocacoesIniciais.add(new PeerReview(artigos.get(2), pesquisadores.get(7), conferencias.get(2), 2));
+		alocacoesIniciais.add(new PeerReview(artigos.get(2), pesquisadores.get(2), conferencias.get(2), 3));
+		alocacoesIniciais.add(new PeerReview(artigos.get(3), pesquisadores.get(4), conferencias.get(2), -1));
+		alocacoesIniciais.add(new PeerReview(artigos.get(3), pesquisadores.get(6), conferencias.get(2), 1));
+		alocacoesIniciais.add(new PeerReview(artigos.get(4), pesquisadores.get(1), conferencias.get(2), 1));
+		alocacoesIniciais.add(new PeerReview(artigos.get(4), pesquisadores.get(3), conferencias.get(2), 0));
+		alocacoesIniciais.add(new PeerReview(artigos.get(5), pesquisadores.get(4), conferencias.get(2), -3));
+		alocacoesIniciais.add(new PeerReview(artigos.get(5), pesquisadores.get(5), conferencias.get(2), -3));
+		alocacoesIniciais.add(new PeerReview(artigos.get(6), pesquisadores.get(3), conferencias.get(2), -1));
+		alocacoesIniciais.add(new PeerReview(artigos.get(6), pesquisadores.get(6), conferencias.get(2), 0));
+		
+		Alocacoes.put(conferencias.get(2), alocacoesIniciais);
+		
+		alocacoesIniciais = null;
 
 	}
 
