@@ -1,4 +1,4 @@
-package TCP.peer.review.Logic;
+package TCP.peer.review.Data;
 
 public class Artigo {
 	private Integer id;

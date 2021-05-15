@@ -1,4 +1,4 @@
-package TCP.peer.review.Logic;
+package TCP.peer.review.Data;
 
 import java.util.ArrayList;
 

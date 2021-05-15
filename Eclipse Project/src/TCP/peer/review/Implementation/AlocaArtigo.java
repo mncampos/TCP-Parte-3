@@ -1,17 +1,35 @@
-package TCP.peer.review.Logic;
+package TCP.peer.review.Implementation;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class PeerReviewCommands {
+import TCP.peer.review.Data.Artigo;
+import TCP.peer.review.Data.Conferencia;
+import TCP.peer.review.Data.PeerReview;
+import TCP.peer.review.Data.Pesquisador;
 
-	// Aloca os revisores para os artigos de acordo com o que foi especificado
-	public static ArrayList<PeerReview> StartAlocation(Conferencia conf, int num) {
+/**
+ * 
+ * Classe responsável pela funcionalidade de alocação de artigos no comitê.
+ * @author Mateus, Raul, Germano
+ *
+ */
+public class AlocaArtigo {
+
+	/**
+	 * Aloca o comitê de uma certa conferência, retorna uma lista onde cada nó é uma
+	 * relação Revisor x Artigo.
+	 * 
+	 * @param conf
+	 * @param num
+	 * @return ArrayList
+	 */
+	public static ArrayList<PeerReview> alocaComitê(Conferencia conf, int num) {
 
 		ArrayList<Artigo> artigosSubmetidos = new ArrayList<Artigo>(conf.getArtigosSubmetidos()); // Artigos submetidos
 																									// na conferência
-		ArrayList<PeerReview> alocacaoTotal = new ArrayList<PeerReview>(); // Lista usada para armazenar os revisores
+		ArrayList<PeerReview> comitê = new ArrayList<PeerReview>(); // Lista usada para armazenar os revisores
 
 		// Garante que não há nenhuma artigo alocado no comitê
 		for (Pesquisador p : conf.getComitê()) {
@@ -55,7 +73,7 @@ public class PeerReviewCommands {
 				Collections.sort(Candidatos);
 
 				// Aloca o primeiro candidato da lista e recomeça o loop
-				alocacaoTotal.add(new PeerReview(a, Candidatos.get(0), conf));
+				comitê.add(new PeerReview(a, Candidatos.get(0), conf));
 				Candidatos.get(0).setNumArtigosAlocados(Candidatos.get(0).getNumArtigosAlocados() + 1);
 				System.out.println(
 						"Artigo de ID " + a.getId() + " alocado ao revisor de ID " + Candidatos.get(0).getId());
@@ -64,15 +82,8 @@ public class PeerReviewCommands {
 			}
 		}
 		// Retorna a lista de usuários alocados com seus respectivos artigos
-		return alocacaoTotal;
-	}
-
-	public static void AtribuiNota(PeerReview artigo, int Nota) {
-		artigo.setNota(Nota);
-	}
-
-	public static void VisualizaRelatorio() {
-		// Fazer
+		System.out.println("Fim da Alocação.");
+		return comitê;
 	}
 
 }

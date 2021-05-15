@@ -6,19 +6,27 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 import javax.swing.JButton;
 
-import TCP.peer.review.Database.Database;
+import TCP.peer.review.Tests.Tests;
 
-public class Button extends JButton {
+public class MainButton extends JButton {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -3304785069452550960L;
 
-	// Construtor de botão para a janela principal, pede um texto para o botão, seu
-	// tamanho e sua posição na janela, e tambem a funcao que ira desempenhar como
-	// um int
-	public Button(String text, int sizeX, int sizeY, int posX, int posY, int funcao) {
+	/**
+	 *  Classe responsável pelos 3 botões do menu principal. Eles são o gatilho para as outras funcionalidades.
+	 * @param text : Texto do botão
+	 * @param sizeX : Largura
+	 * @param sizeY : Altura
+	 * @param posX : Posição X
+	 * @param posY : Posição Y
+	 * @param funcao : Funcionalidade
+	 * Funcionalidades:
+	 * 1 -> Botão de alocar artigo
+	 * 2 -> Botão de atribuir nota
+	 * 3 -> Botão de visualizar relatório
+	 */
+	public MainButton(String text, int sizeX, int sizeY, int posX, int posY, int funcao) {
 		this.setText(text);
 		this.setBounds(posX, posY, sizeX, sizeY);
 
@@ -28,7 +36,7 @@ public class Button extends JButton {
 			ActionListener alocaArtigo = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					AlocarArtigo.execute();
+					AlocaArtigoGUI.execute();
 				}
 			};
 			this.addActionListener(alocaArtigo);
@@ -38,10 +46,10 @@ public class Button extends JButton {
 			ActionListener atribNota = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if (Database.getInstance().getAlocacoesListTotalSize() == 0)
+					if (Tests.testAlocacoes() == false)
 						showMessageDialog(null, "Nenhuma conferência foi alocada.");
 					else
-						AtribuirNota.execute();
+						AtribuiNotaGUI.execute();
 				}
 			};
 			this.addActionListener(atribNota);
@@ -51,8 +59,7 @@ public class Button extends JButton {
 			ActionListener visualizaRelatorio = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					VisualizaRelatorio.execute();
-
+					VisualizaRelatorioGUI.execute();
 				}
 			};
 			this.addActionListener(visualizaRelatorio);
